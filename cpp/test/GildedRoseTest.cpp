@@ -128,3 +128,15 @@ TEST(GildedRoseTest, backstage_pass_sellin_0_quality_51) {
     EXPECT_EQ(-1, app.items[0].sellIn);
     EXPECT_EQ(0,  app.items[0].quality);
 }
+
+// --------------------------------------------------------
+// 빈 배열
+// --------------------------------------------------------
+
+// 아이템 없을 경우 정상 처리
+TEST(GildedRoseTest, should_be_nothing_when_no_item) {
+    std::vector<Item> items;
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(0u, items.size());
+}
