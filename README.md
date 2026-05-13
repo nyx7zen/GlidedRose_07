@@ -53,9 +53,9 @@ ctest --test-dir build
 - [x] Foo — 기본 테스트 (name 불변 확인)
 - [x] noname_sellin_0_quality_0 — 일반 아이템: 품질이 이미 0이라 감소 안 됨
 - [x] noname_sellin_0_quality_5 — 일반 아이템: 유통기한 지나면 품질 -2
-- [ ] sulfuras_sellin_0_quality_5 — 전설 아이템: 아무것도 변화 없음
-- [ ] sulfuras_sellin_m1_quality_5 — 전설 아이템: 기한 마감 후에도 변화 없음
-- [ ] agedBrie_sellin_0_quality_0 — Aged Brie: 기한 지나면 품질 +2
+- [x] sulfuras_sellin_0_quality_5 — 전설 아이템: 아무것도 변화 없음
+- [x] sulfuras_sellin_m1_quality_5 — 전설 아이템: 기한 마감 후에도 변화 없음
+- [x] agedBrie_sellin_0_quality_0 — Aged Brie: 기한 지나면 품질 +2
 - [ ] agedBrie_sellin_0_quality_50 — Aged Brie: 품질 상한 50 초과 불가
 - [ ] backstage_pass_sellin_15_quality_0 — Backstage: 10일 초과 시 품질 +1
 - [ ] backstage_pass_sellin_0_quality_0 — Backstage: 공연 지난 후 품질 0
