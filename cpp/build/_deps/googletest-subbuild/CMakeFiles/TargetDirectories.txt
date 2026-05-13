@@ -1,3 +1,0 @@
-C:/DEV/week1_day3/GildedRose_07/cpp/build/_deps/googletest-subbuild/CMakeFiles/googletest-populate.dir
-C:/DEV/week1_day3/GildedRose_07/cpp/build/_deps/googletest-subbuild/CMakeFiles/edit_cache.dir
-C:/DEV/week1_day3/GildedRose_07/cpp/build/_deps/googletest-subbuild/CMakeFiles/rebuild_cache.dir

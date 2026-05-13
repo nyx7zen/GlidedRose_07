@@ -1,5 +1,0 @@
-add_test([=[GildedRoseTest.Foo]=]  C:/DEV/week1_day3/GildedRose_07/cpp/build/gilded_rose_test.exe [==[--gtest_filter=GildedRoseTest.Foo]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[GildedRoseTest.Foo]=]  PROPERTIES DEF_SOURCE_LINE [==[C:\DEV\week1_day3\GildedRose_07\cpp\test\GildedRoseTest.cpp:4]==] WORKING_DIRECTORY C:/DEV/week1_day3/GildedRose_07/cpp/build SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-add_test([=[GildedRoseTest.noname_sellin_0_quality_0]=]  C:/DEV/week1_day3/GildedRose_07/cpp/build/gilded_rose_test.exe [==[--gtest_filter=GildedRoseTest.noname_sellin_0_quality_0]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[GildedRoseTest.noname_sellin_0_quality_0]=]  PROPERTIES DEF_SOURCE_LINE [==[C:\DEV\week1_day3\GildedRose_07\cpp\test\GildedRoseTest.cpp:13]==] WORKING_DIRECTORY C:/DEV/week1_day3/GildedRose_07/cpp/build SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set(  gilded_rose_test_TESTS GildedRoseTest.Foo GildedRoseTest.noname_sellin_0_quality_0)
