@@ -51,3 +51,5 @@ ctest --test-dir build
 ### To-Do List
 
 - [x] Foo — 기본 테스트 (name 불변 확인)
+- [x] noname_sellin_0_quality_0 — 일반 아이템: 품질이 이미 0이라 감소 안 됨
+- [ ] noname_sellin_0_quality_5 — 일반 아이템: 유통기한 지나면 품질 -2
