@@ -78,3 +78,13 @@ TEST(GildedRoseTest, agedBrie_sellin_0_quality_0) {
     EXPECT_EQ(-1, app.items[0].sellIn);
     EXPECT_EQ(2,  app.items[0].quality);
 }
+
+// 입력: Aged Brie, 0, 50  /  예상: sellIn=-1, quality=50
+// 품질 상한 50 초과 불가
+TEST(GildedRoseTest, agedBrie_sellin_0_quality_50) {
+    std::vector<Item> items = { Item("Aged Brie", 0, 50) };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(-1, app.items[0].sellIn);
+    EXPECT_EQ(50, app.items[0].quality);
+}
