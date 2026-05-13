@@ -104,3 +104,15 @@ TEST(GildedRoseTest, backstage_pass_sellin_15_quality_0) {
     EXPECT_EQ(14, app.items[0].sellIn);
     EXPECT_EQ(1,  app.items[0].quality);
 }
+
+// 입력: Backstage, 0, 0  /  예상: sellIn=-1, quality=0
+// 공연 지난 후 품질 0
+TEST(GildedRoseTest, backstage_pass_sellin_0_quality_0) {
+    std::vector<Item> items = {
+        Item("Backstage passes to a TAFKAL80ETC concert", 0, 0)
+    };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(-1, app.items[0].sellIn);
+    EXPECT_EQ(0,  app.items[0].quality);
+}
