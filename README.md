@@ -59,5 +59,5 @@ ctest --test-dir build
 - [x] agedBrie_sellin_0_quality_50 — Aged Brie: 품질 상한 50 초과 불가
 - [x] backstage_pass_sellin_15_quality_0 — Backstage: 10일 초과 시 품질 +1
 - [x] backstage_pass_sellin_0_quality_0 — Backstage: 공연 지난 후 품질 0
-- [ ] backstage_pass_sellin_0_quality_51 — Backstage: 품질 초과 후 공연 종료 시 0
+- [x] backstage_pass_sellin_0_quality_51 — Backstage: 품질 초과 후 공연 종료 시 0
 - [ ] should_be_nothing_when_no_item — 빈 배열: 아이템 없을 경우 정상 처리
