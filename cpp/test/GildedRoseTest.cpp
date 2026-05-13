@@ -88,3 +88,19 @@ TEST(GildedRoseTest, agedBrie_sellin_0_quality_50) {
     EXPECT_EQ(-1, app.items[0].sellIn);
     EXPECT_EQ(50, app.items[0].quality);
 }
+
+// --------------------------------------------------------
+// Backstage passes
+// --------------------------------------------------------
+
+// 입력: Backstage, 15, 0  /  예상: sellIn=14, quality=1
+// 10일 초과 시 품질 +1
+TEST(GildedRoseTest, backstage_pass_sellin_15_quality_0) {
+    std::vector<Item> items = {
+        Item("Backstage passes to a TAFKAL80ETC concert", 15, 0)
+    };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(14, app.items[0].sellIn);
+    EXPECT_EQ(1,  app.items[0].quality);
+}
