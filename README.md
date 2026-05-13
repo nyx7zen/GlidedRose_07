@@ -49,3 +49,5 @@ ctest --test-dir build
 ### unit test VS golden-master test 비교
 
 ### To-Do List
+
+- [x] Foo — 기본 테스트 (name 불변 확인)

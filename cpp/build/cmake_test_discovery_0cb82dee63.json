@@ -1,0 +1,22 @@
+{
+  "tests": 2,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "GildedRoseTest",
+      "tests": 2,
+      "testsuite": [
+        {
+          "name": "Foo",
+          "file": "C:\\DEV\\week1_day3\\GildedRose_07\\cpp\\test\\GildedRoseTest.cpp",
+          "line": 4
+        },
+        {
+          "name": "noname_sellin_0_quality_0",
+          "file": "C:\\DEV\\week1_day3\\GildedRose_07\\cpp\\test\\GildedRoseTest.cpp",
+          "line": 13
+        }
+      ]
+    }
+  ]
+}

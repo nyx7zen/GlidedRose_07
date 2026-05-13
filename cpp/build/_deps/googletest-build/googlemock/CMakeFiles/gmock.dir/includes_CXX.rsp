@@ -1,0 +1,1 @@
+-I"C:/DEV/week1_day3/GildedRose_07/cpp/build/_deps/googletest-src/googlemock/include" -I"C:/DEV/week1_day3/GildedRose_07/cpp/build/_deps/googletest-src/googlemock" -isystem "C:/DEV/week1_day3/GildedRose_07/cpp/build/_deps/googletest-src/googletest/include" -isystem "C:/DEV/week1_day3/GildedRose_07/cpp/build/_deps/googletest-src/googletest"

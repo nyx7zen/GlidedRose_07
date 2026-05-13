@@ -1,0 +1,3 @@
+GildedRoseTest.Foo 2 0.0070492
+GildedRoseTest.noname_sellin_0_quality_0 1 0.0129355
+---
