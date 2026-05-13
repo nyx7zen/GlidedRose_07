@@ -39,3 +39,15 @@ TEST(GildedRoseTest, sulfuras_sellin_0_quality_5) {
     EXPECT_EQ(0, app.items[0].sellIn);
     EXPECT_EQ(5, app.items[0].quality);
 }
+
+// 입력: Sulfuras, -1, 5  /  예상: sellIn=-1, quality=5
+// 전설 아이템: 기한 마감 후에도 변화 없음
+TEST(GildedRoseTest, sulfuras_sellin_m1_quality_5) {
+    std::vector<Item> items = {
+        Item("Sulfuras, Hand of Ragnaros", -1, 5)
+    };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(-1, app.items[0].sellIn);
+    EXPECT_EQ(5,  app.items[0].quality);
+}
