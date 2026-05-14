@@ -75,10 +75,10 @@ ctest --test-dir build
 - [x] BackstagePass_SellIn5_QualityPlus3 — Backstage: sellIn 5일 경계값 +3
 
 #### Step 2 — 코드 정리 (상수 추출 + 변수 추출)
-- [ ] AGED_BRIE, BACKSTAGE_PASS, SULFURAS 상수 추출
-- [ ] MAX_QUALITY, MIN_QUALITY 상수 추출
-- [ ] items[i] → Item& item 변수 추출
-- [ ] 불필요한 중첩 제거
+- [x] AGED_BRIE, BACKSTAGE_PASS, SULFURAS 상수 추출
+- [x] MAX_QUALITY, MIN_QUALITY 상수 추출
+- [x] items[i] → Item& item 변수 추출
+- [x] 불필요한 중첩 제거
 
 #### Step 3 — 조건 분리 (Condition Simplification)
 - [ ] if(!~) → 긍정 조건으로 전환 (Invert if)
