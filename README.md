@@ -93,10 +93,10 @@ ctest --test-dir build
 - [x] updateSellIn() 추출
 
 #### Step 5 — 클래스 분리 (Move Method + New Class)
-- [ ] AgedBrieItem 클래스 생성
-- [ ] BackstagePassItem 클래스 생성
-- [ ] SulfurasItem 클래스 생성
-- [ ] NormalItem 클래스 생성
+- [x] AgedBrieItem 클래스 생성
+- [x] BackstagePassItem 클래스 생성
+- [x] SulfurasItem 클래스 생성
+- [x] NormalItem 클래스 생성
 
 #### Step 6 — 추상화 (Abstract Base Class + Factory)
 - [ ] GildedRoseItem 추상 클래스 생성
