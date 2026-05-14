@@ -125,7 +125,7 @@ ctest --test-dir build
 - [x] updateSellIn() 분리 유지 확인
 
 #### Step 11 — Factory 조기 반환 패턴 (Early Return)
-- [ ] else if 체인 → if 조기 반환 패턴으로 변경
+- [x] else if 체인 → if 조기 반환 패턴으로 변경
 
 #### Step 12 — Inline Variable (임시 변수 제거)
 - [ ] gi 임시 변수 제거
