@@ -10,8 +10,8 @@ GildedRose::GildedRose(std::vector<Item>& items) : items(items) {}
 void GildedRose::updateQuality() {
     for (auto& item : items) {
         std::unique_ptr<GildedRoseItem> gi = createItem(item);
-        gi->updateQuality();
-        updateSellIn(item);
+        gi->updateQuality();    // 타입별 로직은 각 클래스에 위임
+        updateSellIn(item);     // sellIn 업데이트 분리 유지
     }
 }
 

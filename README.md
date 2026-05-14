@@ -121,8 +121,8 @@ ctest --test-dir build
 - [x] updateQuality() 내 중복 제거
 
 #### Step 10 — Extract Method 정리
-- [ ] updateQuality() 타입별 로직 각 클래스에 위임 확인
-- [ ] updateSellIn() 분리 유지 확인
+- [x] updateQuality() 타입별 로직 각 클래스에 위임 확인
+- [x] updateSellIn() 분리 유지 확인
 
 #### Step 11 — Factory 조기 반환 패턴 (Early Return)
 - [ ] else if 체인 → if 조기 반환 패턴으로 변경
