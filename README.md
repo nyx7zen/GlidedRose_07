@@ -128,5 +128,5 @@ ctest --test-dir build
 - [x] else if 체인 → if 조기 반환 패턴으로 변경
 
 #### Step 12 — Inline Variable (임시 변수 제거)
-- [ ] gi 임시 변수 제거
-- [ ] createItem(item)->updateQuality() 한 줄로 정리
+- [x] gi 임시 변수 제거
+- [x] createItem(item)->updateQuality() 한 줄로 정리
