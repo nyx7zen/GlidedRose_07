@@ -117,8 +117,8 @@ ctest --test-dir build
 - [x] if/else if 체인으로 통일
 
 #### Step 9 — 중복 제거 (Remove Duplication)
-- [ ] createItem() 으로 Factory 로직 추출
-- [ ] updateQuality() 내 중복 제거
+- [x] createItem() 으로 Factory 로직 추출
+- [x] updateQuality() 내 중복 제거
 
 #### Step 10 — Extract Method 정리
 - [ ] updateQuality() 타입별 로직 각 클래스에 위임 확인
