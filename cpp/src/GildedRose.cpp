@@ -1,56 +1,31 @@
 #include "GildedRose.h"
+#include "AgedBrieItem.h"
+#include "BackstagePassItem.h"
+#include "SulfurasItem.h"
+#include "NormalItem.h"
+#include "FoodBeverageItem.h"
 
 GildedRose::GildedRose(std::vector<Item>& items) : items(items) {}
 
 void GildedRose::updateQuality() {
-    for (size_t i = 0; i < items.size(); i++) {
-        if (items[i].name != "Aged Brie"
-                && items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
-            if (items[i].quality > 0) {
-                if (items[i].name != "Sulfuras, Hand of Ragnaros") {
-                    items[i].quality = items[i].quality - 1;
-                }
-            }
-        } else {
-            if (items[i].quality < 50) {
-                items[i].quality = items[i].quality + 1;
-
-                if (items[i].name == "Backstage passes to a TAFKAL80ETC concert") {
-                    if (items[i].sellIn < 11) {
-                        if (items[i].quality < 50) {
-                            items[i].quality = items[i].quality + 1;
-                        }
-                    }
-
-                    if (items[i].sellIn < 6) {
-                        if (items[i].quality < 50) {
-                            items[i].quality = items[i].quality + 1;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (items[i].name != "Sulfuras, Hand of Ragnaros") {
-            items[i].sellIn = items[i].sellIn - 1;
-        }
-
-        if (items[i].sellIn < 0) {
-            if (items[i].name != "Aged Brie") {
-                if (items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
-                    if (items[i].quality > 0) {
-                        if (items[i].name != "Sulfuras, Hand of Ragnaros") {
-                            items[i].quality = items[i].quality - 1;
-                        }
-                    }
-                } else {
-                    items[i].quality = items[i].quality - items[i].quality;
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
-                }
-            }
-        }
+    for (auto& item : items) {
+        createItem(item)->updateQuality();  // gi 임시 변수 제거
+        updateSellIn(item);
     }
+}
+
+std::unique_ptr<GildedRoseItem> GildedRose::createItem(Item& item) {
+    if (item.name == AGED_BRIE)
+        return std::make_unique<AgedBrieItem>(item);
+    if (item.name == BACKSTAGE_PASS)
+        return std::make_unique<BackstagePassItem>(item);
+    if (item.name == SULFURAS)
+        return std::make_unique<SulfurasItem>(item);
+    if (item.name.find(FOOD_BEVERAGE) != std::string::npos)
+        return std::make_unique<FoodBeverageItem>(item);
+    return std::make_unique<NormalItem>(item);
+}
+
+void GildedRose::updateSellIn(Item& item) {
+    if (item.name != SULFURAS) item.sellIn--;
 }

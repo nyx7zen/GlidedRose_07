@@ -48,7 +48,7 @@ ctest --test-dir build
 
 ### unit test VS golden-master test 비교
 
-### To-Do List
+### To-Do List (dev branch)
 
 - [x] Foo — 기본 테스트 (name 불변 확인)
 - [x] noname_sellin_0_quality_0 — 일반 아이템: 품질이 이미 0이라 감소 안 됨
@@ -62,3 +62,71 @@ ctest --test-dir build
 - [x] backstage_pass_sellin_0_quality_51 — Backstage: 품질 초과 후 공연 종료 시 0
 - [x] should_be_nothing_when_no_item — 빈 배열: 아이템 없을 경우 정상 처리
 - [x] ApprovalTest ThirtyDays — Golden Master 30일 스냅샷 승인
+---
+
+### To-Do List (refactoring branch)
+
+#### Step 1 — 테스트 먼저 (회귀 테스트 보강)
+- [x] NormalItemDegrades — 일반 아이템: 매일 quality -1, sellIn -1
+- [x] AgedBrieIncreasesQuality — Aged Brie: 오래될수록 quality 증가
+- [x] BackstagePass_SellIn11_QualityPlus1 — Backstage: sellIn 11일 경계값 +1
+- [x] BackstagePass_SellIn10_QualityPlus2 — Backstage: sellIn 10일 경계값 +2
+- [x] BackstagePass_SellIn6_QualityPlus2 — Backstage: sellIn 6일 +2
+- [x] BackstagePass_SellIn5_QualityPlus3 — Backstage: sellIn 5일 경계값 +3
+
+#### Step 2 — 코드 정리 (상수 추출 + 변수 추출)
+- [x] AGED_BRIE, BACKSTAGE_PASS, SULFURAS 상수 추출
+- [x] MAX_QUALITY, MIN_QUALITY 상수 추출
+- [x] items[i] → Item& item 변수 추출
+- [x] 불필요한 중첩 제거
+
+#### Step 3 — 조건 분리 (Condition Simplification)
+- [x] if(!~) → 긍정 조건으로 전환 (Invert if)
+- [x] else + if → else if 병합
+- [x] sellIn 전/후 중복 조건 하나로 합치기 (sellIn 0 → 1 경계 조정)
+
+#### Step 4 — 메서드 추출 (Extract Method)
+- [x] updateAgedBrie() 추출
+- [x] updateBackstagePass() 추출
+- [x] updateSulfuras() 추출
+- [x] updateNormalItem() 추출
+- [x] updateSellIn() 추출
+
+#### Step 5 — 클래스 분리 (Move Method + New Class)
+- [x] AgedBrieItem 클래스 생성
+- [x] BackstagePassItem 클래스 생성
+- [x] SulfurasItem 클래스 생성
+- [x] NormalItem 클래스 생성
+
+#### Step 6 — 추상화 (Abstract Base Class + Factory)
+- [x] GildedRoseItem 추상 클래스 생성
+- [x] 각 클래스 GildedRoseItem 상속
+- [x] createItem() Factory 함수 생성
+- [x] updateQuality() 다형성 적용
+
+#### Step 7 — 새 기능 추가 및 ApprovalTest 갱신 (Food & Beverage)
+- [x] FoodBeverageItem 클래스 생성
+- [x] Factory 에 F&B 타입 등록
+- [x] F&B 테스트 추가 (DegradesTwiceAsNormal)
+- [x] F&B 테스트 추가 (DegradesFourTimesAfterSellIn)
+- [x] F&B 테스트 추가 (QualityNeverBelowZero)
+- [x] ApprovalTest.ThirtyDays approved.txt 갱신
+
+#### Step 8 — 변수 선언 분리 (Split Variable Declaration)
+- [x] unique_ptr 선언과 초기화 분리
+- [x] if/else if 체인으로 통일
+
+#### Step 9 — 중복 제거 (Remove Duplication)
+- [x] createItem() 으로 Factory 로직 추출
+- [x] updateQuality() 내 중복 제거
+
+#### Step 10 — Extract Method 정리
+- [x] updateQuality() 타입별 로직 각 클래스에 위임 확인
+- [x] updateSellIn() 분리 유지 확인
+
+#### Step 11 — Factory 조기 반환 패턴 (Early Return)
+- [x] else if 체인 → if 조기 반환 패턴으로 변경
+
+#### Step 12 — Inline Variable (임시 변수 제거)
+- [x] gi 임시 변수 제거
+- [x] createItem(item)->updateQuality() 한 줄로 정리

@@ -140,3 +140,93 @@ TEST(GildedRoseTest, should_be_nothing_when_no_item) {
     app.updateQuality();
     EXPECT_EQ(0u, items.size());
 }
+
+// --------------------------------------------------------
+// Step 1 — 회귀 테스트 보강
+// --------------------------------------------------------
+
+// 일반 아이템: 매일 quality -1, sellIn -1
+TEST(GildedRoseTest, NormalItemDegrades) {
+    std::vector<Item> items = { Item("+5 Dexterity Vest", 10, 20) };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(9,  items[0].sellIn);
+    EXPECT_EQ(19, items[0].quality);
+}
+
+// Aged Brie: 오래될수록 quality 증가
+TEST(GildedRoseTest, AgedBrieIncreasesQuality) {
+    std::vector<Item> items = { Item("Aged Brie", 5, 10) };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(11, items[0].quality);
+}
+
+// Backstage: sellIn 11일 → quality +1
+TEST(GildedRoseTest, BackstagePass_SellIn11_QualityPlus1) {
+    std::vector<Item> items = {
+        Item("Backstage passes to a TAFKAL80ETC concert", 11, 20)
+    };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(21, items[0].quality);
+}
+
+// Backstage: sellIn 10일 → quality +2 (경계값)
+TEST(GildedRoseTest, BackstagePass_SellIn10_QualityPlus2) {
+    std::vector<Item> items = {
+        Item("Backstage passes to a TAFKAL80ETC concert", 10, 20)
+    };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(22, items[0].quality);
+}
+
+// Backstage: sellIn 6일 → quality +2
+TEST(GildedRoseTest, BackstagePass_SellIn6_QualityPlus2) {
+    std::vector<Item> items = {
+        Item("Backstage passes to a TAFKAL80ETC concert", 6, 20)
+    };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(22, items[0].quality);
+}
+
+// Backstage: sellIn 5일 → quality +3 (경계값)
+TEST(GildedRoseTest, BackstagePass_SellIn5_QualityPlus3) {
+    std::vector<Item> items = {
+        Item("Backstage passes to a TAFKAL80ETC concert", 5, 20)
+    };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(23, items[0].quality);
+}
+
+// --------------------------------------------------------
+// Step 7 — FoodBeverage 테스트
+// --------------------------------------------------------
+
+// F&B: 일반의 2배 감소
+TEST(GildedRoseTest, FoodBeverage_DegradesTwiceAsNormal) {
+    std::vector<Item> items = { Item("[F&B] Bread", 5, 20) };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(4,  items[0].sellIn);
+    EXPECT_EQ(18, items[0].quality);
+}
+
+// F&B: 만료 후 4배 감소
+TEST(GildedRoseTest, FoodBeverage_DegradesFourTimesAfterSellIn) {
+    std::vector<Item> items = { Item("[F&B] Milk", 0, 20) };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(16, items[0].quality);
+}
+
+// F&B: quality 는 0 미만이 되지 않는다
+TEST(GildedRoseTest, FoodBeverage_QualityNeverBelowZero) {
+    std::vector<Item> items = { Item("[F&B] Water", 0, 1) };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(0, items[0].quality);
+}
