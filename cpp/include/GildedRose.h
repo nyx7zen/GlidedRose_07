@@ -1,6 +1,8 @@
 #pragma once
 #include "Item.h"
+#include "GildedRoseItem.h"
 #include <vector>
+#include <memory>
 
 class GildedRose {
 public:
@@ -16,5 +18,6 @@ private:
     static constexpr const char* SULFURAS       =
         "Sulfuras, Hand of Ragnaros";
 
+    std::unique_ptr<GildedRoseItem> createItem(Item& item);
     void updateSellIn(Item& item);
 };

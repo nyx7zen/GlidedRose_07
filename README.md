@@ -99,10 +99,10 @@ ctest --test-dir build
 - [x] NormalItem 클래스 생성
 
 #### Step 6 — 추상화 (Abstract Base Class + Factory)
-- [ ] GildedRoseItem 추상 클래스 생성
-- [ ] 각 클래스 GildedRoseItem 상속
-- [ ] createItem() Factory 함수 생성
-- [ ] updateQuality() 다형성 적용
+- [x] GildedRoseItem 추상 클래스 생성
+- [x] 각 클래스 GildedRoseItem 상속
+- [x] createItem() Factory 함수 생성
+- [x] updateQuality() 다형성 적용
 
 #### Step 7 — 새 기능 추가 (Food & Beverage)
 - [ ] FoodBeverageItem 클래스 생성

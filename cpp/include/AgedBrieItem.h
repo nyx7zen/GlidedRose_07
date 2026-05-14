@@ -1,14 +1,12 @@
 #pragma once
-#include "Item.h"
+#include "GildedRoseItem.h"
 
-class AgedBrieItem {
-    Item& item_;
+class AgedBrieItem : public GildedRoseItem {
 public:
-    explicit AgedBrieItem(Item& item) : item_(item) {}
-    void updateQuality() {
-        static constexpr int MAX = 50;
-        if (item_.quality < MAX) item_.quality++;
+    using GildedRoseItem::GildedRoseItem;
+    void updateQuality() override {
+        if (item_.quality < MAX_QUALITY) item_.quality++;
         if (item_.sellIn < 1)
-            if (item_.quality < MAX) item_.quality++;
+            if (item_.quality < MAX_QUALITY) item_.quality++;
     }
 };
