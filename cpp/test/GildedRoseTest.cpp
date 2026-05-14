@@ -201,3 +201,32 @@ TEST(GildedRoseTest, BackstagePass_SellIn5_QualityPlus3) {
     app.updateQuality();
     EXPECT_EQ(23, items[0].quality);
 }
+
+// --------------------------------------------------------
+// Step 7 — FoodBeverage 테스트
+// --------------------------------------------------------
+
+// F&B: 일반의 2배 감소
+TEST(GildedRoseTest, FoodBeverage_DegradesTwiceAsNormal) {
+    std::vector<Item> items = { Item("[F&B] Bread", 5, 20) };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(4,  items[0].sellIn);
+    EXPECT_EQ(18, items[0].quality);
+}
+
+// F&B: 만료 후 4배 감소
+TEST(GildedRoseTest, FoodBeverage_DegradesFourTimesAfterSellIn) {
+    std::vector<Item> items = { Item("[F&B] Milk", 0, 20) };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(16, items[0].quality);
+}
+
+// F&B: quality 는 0 미만이 되지 않는다
+TEST(GildedRoseTest, FoodBeverage_QualityNeverBelowZero) {
+    std::vector<Item> items = { Item("[F&B] Water", 0, 1) };
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(0, items[0].quality);
+}

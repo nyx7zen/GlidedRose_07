@@ -17,6 +17,7 @@ private:
         "Backstage passes to a TAFKAL80ETC concert";
     static constexpr const char* SULFURAS       =
         "Sulfuras, Hand of Ragnaros";
+    static constexpr const char* FOOD_BEVERAGE  = "[F&B]";   // 추가
 
     std::unique_ptr<GildedRoseItem> createItem(Item& item);
     void updateSellIn(Item& item);

@@ -21,6 +21,7 @@ protected:
             Item("Backstage passes to a TAFKAL80ETC concert",      10, 49),
             Item("Backstage passes to a TAFKAL80ETC concert",       5, 49),
             Item("Conjured Mana Cake",                              3,  6),
+            Item("[F&B] Bread",                                     5, 20),  // ← 추가
         };
 
         GildedRose app(items);

@@ -104,10 +104,10 @@ ctest --test-dir build
 - [x] createItem() Factory 함수 생성
 - [x] updateQuality() 다형성 적용
 
-#### Step 7 — 새 기능 추가 (Food & Beverage)
-- [ ] FoodBeverageItem 클래스 생성
-- [ ] Factory 에 F&B 타입 등록
-- [ ] F&B 테스트 추가 (DegradesTwiceAsNormal)
-- [ ] F&B 테스트 추가 (DegradesFourTimesAfterSellIn)
-- [ ] F&B 테스트 추가 (QualityNeverBelowZero)
-- [ ] ApprovalTest.ThirtyDays approved.txt 갱신
+#### Step 7 — 새 기능 추가 및 ApprovalTest 갱신 (Food & Beverage)
+- [x] FoodBeverageItem 클래스 생성
+- [x] Factory 에 F&B 타입 등록
+- [x] F&B 테스트 추가 (DegradesTwiceAsNormal)
+- [x] F&B 테스트 추가 (DegradesFourTimesAfterSellIn)
+- [x] F&B 테스트 추가 (QualityNeverBelowZero)
+- [x] ApprovalTest.ThirtyDays approved.txt 갱신
