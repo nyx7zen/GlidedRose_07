@@ -111,3 +111,22 @@ ctest --test-dir build
 - [x] F&B 테스트 추가 (DegradesFourTimesAfterSellIn)
 - [x] F&B 테스트 추가 (QualityNeverBelowZero)
 - [x] ApprovalTest.ThirtyDays approved.txt 갱신
+
+#### Step 8 — 변수 선언 분리 (Split Variable Declaration)
+- [x] unique_ptr 선언과 초기화 분리
+- [x] if/else if 체인으로 통일
+
+#### Step 9 — 중복 제거 (Remove Duplication)
+- [ ] createItem() 으로 Factory 로직 추출
+- [ ] updateQuality() 내 중복 제거
+
+#### Step 10 — Extract Method 정리
+- [ ] updateQuality() 타입별 로직 각 클래스에 위임 확인
+- [ ] updateSellIn() 분리 유지 확인
+
+#### Step 11 — Factory 조기 반환 패턴 (Early Return)
+- [ ] else if 체인 → if 조기 반환 패턴으로 변경
+
+#### Step 12 — Inline Variable (임시 변수 제거)
+- [ ] gi 임시 변수 제거
+- [ ] createItem(item)->updateQuality() 한 줄로 정리

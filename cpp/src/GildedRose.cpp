@@ -9,7 +9,14 @@ GildedRose::GildedRose(std::vector<Item>& items) : items(items) {}
 
 void GildedRose::updateQuality() {
     for (auto& item : items) {
-        createItem(item)->updateQuality();
+        std::unique_ptr<GildedRoseItem> gi;
+        if      (item.name == AGED_BRIE)      gi = std::make_unique<AgedBrieItem>(item);
+        else if (item.name == BACKSTAGE_PASS) gi = std::make_unique<BackstagePassItem>(item);
+        else if (item.name == SULFURAS)       gi = std::make_unique<SulfurasItem>(item);
+        else if (item.name.find(FOOD_BEVERAGE) != std::string::npos)
+                                              gi = std::make_unique<FoodBeverageItem>(item);
+        else                                  gi = std::make_unique<NormalItem>(item);
+        gi->updateQuality();
         updateSellIn(item);
     }
 }
