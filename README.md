@@ -48,7 +48,7 @@ ctest --test-dir build
 
 ### unit test VS golden-master test 비교
 
-### To-Do List
+### To-Do List (dev branch)
 
 - [x] Foo — 기본 테스트 (name 불변 확인)
 - [x] noname_sellin_0_quality_0 — 일반 아이템: 품질이 이미 0이라 감소 안 됨
@@ -62,3 +62,52 @@ ctest --test-dir build
 - [x] backstage_pass_sellin_0_quality_51 — Backstage: 품질 초과 후 공연 종료 시 0
 - [x] should_be_nothing_when_no_item — 빈 배열: 아이템 없을 경우 정상 처리
 - [x] ApprovalTest ThirtyDays — Golden Master 30일 스냅샷 승인
+---
+
+### To-Do List (refactoring branch)
+
+#### Step 1 — 테스트 먼저 (회귀 테스트 보강)
+- [ ] NormalItemDegrades — 일반 아이템: 매일 quality -1, sellIn -1
+- [ ] AgedBrieIncreasesQuality — Aged Brie: 오래될수록 quality 증가
+- [ ] BackstagePass_SellIn11_QualityPlus1 — Backstage: sellIn 11일 경계값 +1
+- [ ] BackstagePass_SellIn10_QualityPlus2 — Backstage: sellIn 10일 경계값 +2
+- [ ] BackstagePass_SellIn6_QualityPlus2 — Backstage: sellIn 6일 +2
+- [ ] BackstagePass_SellIn5_QualityPlus3 — Backstage: sellIn 5일 경계값 +3
+
+#### Step 2 — 코드 정리 (상수 추출 + 변수 추출)
+- [ ] AGED_BRIE, BACKSTAGE_PASS, SULFURAS 상수 추출
+- [ ] MAX_QUALITY, MIN_QUALITY 상수 추출
+- [ ] items[i] → Item& item 변수 추출
+- [ ] 불필요한 중첩 제거
+
+#### Step 3 — 조건 분리 (Condition Simplification)
+- [ ] if(!~) → 긍정 조건으로 전환 (Invert if)
+- [ ] else + if → else if 병합
+- [ ] sellIn 전/후 중복 조건 하나로 합치기 (sellIn 0 → 1 경계 조정)
+
+#### Step 4 — 메서드 추출 (Extract Method)
+- [ ] updateAgedBrie() 추출
+- [ ] updateBackstagePass() 추출
+- [ ] updateSulfuras() 추출
+- [ ] updateNormalItem() 추출
+- [ ] updateSellIn() 추출
+
+#### Step 5 — 클래스 분리 (Move Method + New Class)
+- [ ] AgedBrieItem 클래스 생성
+- [ ] BackstagePassItem 클래스 생성
+- [ ] SulfurasItem 클래스 생성
+- [ ] NormalItem 클래스 생성
+
+#### Step 6 — 추상화 (Abstract Base Class + Factory)
+- [ ] GildedRoseItem 추상 클래스 생성
+- [ ] 각 클래스 GildedRoseItem 상속
+- [ ] createItem() Factory 함수 생성
+- [ ] updateQuality() 다형성 적용
+
+#### Step 7 — 새 기능 추가 (Food & Beverage)
+- [ ] FoodBeverageItem 클래스 생성
+- [ ] Factory 에 F&B 타입 등록
+- [ ] F&B 테스트 추가 (DegradesTwiceAsNormal)
+- [ ] F&B 테스트 추가 (DegradesFourTimesAfterSellIn)
+- [ ] F&B 테스트 추가 (QualityNeverBelowZero)
+- [ ] ApprovalTest.ThirtyDays approved.txt 갱신
