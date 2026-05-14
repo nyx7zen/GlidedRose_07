@@ -67,12 +67,12 @@ ctest --test-dir build
 ### To-Do List (refactoring branch)
 
 #### Step 1 — 테스트 먼저 (회귀 테스트 보강)
-- [ ] NormalItemDegrades — 일반 아이템: 매일 quality -1, sellIn -1
-- [ ] AgedBrieIncreasesQuality — Aged Brie: 오래될수록 quality 증가
-- [ ] BackstagePass_SellIn11_QualityPlus1 — Backstage: sellIn 11일 경계값 +1
-- [ ] BackstagePass_SellIn10_QualityPlus2 — Backstage: sellIn 10일 경계값 +2
-- [ ] BackstagePass_SellIn6_QualityPlus2 — Backstage: sellIn 6일 +2
-- [ ] BackstagePass_SellIn5_QualityPlus3 — Backstage: sellIn 5일 경계값 +3
+- [x] NormalItemDegrades — 일반 아이템: 매일 quality -1, sellIn -1
+- [x] AgedBrieIncreasesQuality — Aged Brie: 오래될수록 quality 증가
+- [x] BackstagePass_SellIn11_QualityPlus1 — Backstage: sellIn 11일 경계값 +1
+- [x] BackstagePass_SellIn10_QualityPlus2 — Backstage: sellIn 10일 경계값 +2
+- [x] BackstagePass_SellIn6_QualityPlus2 — Backstage: sellIn 6일 +2
+- [x] BackstagePass_SellIn5_QualityPlus3 — Backstage: sellIn 5일 경계값 +3
 
 #### Step 2 — 코드 정리 (상수 추출 + 변수 추출)
 - [ ] AGED_BRIE, BACKSTAGE_PASS, SULFURAS 상수 추출
