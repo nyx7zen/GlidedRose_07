@@ -48,7 +48,11 @@ target_link_libraries(approval_test
 )
 
 include(GoogleTest)
-gtest_discover_tests(gilded_rose_test)
+
+gtest_discover_tests(gilded_rose_test
+    DISCOVERY_MODE PRE_TEST
+)
 gtest_discover_tests(approval_test
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    DISCOVERY_MODE PRE_TEST
 )
