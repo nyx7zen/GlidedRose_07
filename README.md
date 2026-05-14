@@ -81,16 +81,16 @@ ctest --test-dir build
 - [x] 불필요한 중첩 제거
 
 #### Step 3 — 조건 분리 (Condition Simplification)
-- [ ] if(!~) → 긍정 조건으로 전환 (Invert if)
-- [ ] else + if → else if 병합
-- [ ] sellIn 전/후 중복 조건 하나로 합치기 (sellIn 0 → 1 경계 조정)
+- [x] if(!~) → 긍정 조건으로 전환 (Invert if)
+- [x] else + if → else if 병합
+- [x] sellIn 전/후 중복 조건 하나로 합치기 (sellIn 0 → 1 경계 조정)
 
 #### Step 4 — 메서드 추출 (Extract Method)
-- [ ] updateAgedBrie() 추출
-- [ ] updateBackstagePass() 추출
-- [ ] updateSulfuras() 추출
-- [ ] updateNormalItem() 추출
-- [ ] updateSellIn() 추출
+- [x] updateAgedBrie() 추출
+- [x] updateBackstagePass() 추출
+- [x] updateSulfuras() 추출
+- [x] updateNormalItem() 추출
+- [x] updateSellIn() 추출
 
 #### Step 5 — 클래스 분리 (Move Method + New Class)
 - [ ] AgedBrieItem 클래스 생성
