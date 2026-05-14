@@ -47,3 +47,18 @@ ctest --test-dir build
 - unit test 내용 : 문서상에 나타난 동작들 확인
 
 ### unit test VS golden-master test 비교
+
+### To-Do List
+
+- [x] Foo — 기본 테스트 (name 불변 확인)
+- [x] noname_sellin_0_quality_0 — 일반 아이템: 품질이 이미 0이라 감소 안 됨
+- [x] noname_sellin_0_quality_5 — 일반 아이템: 유통기한 지나면 품질 -2
+- [x] sulfuras_sellin_0_quality_5 — 전설 아이템: 아무것도 변화 없음
+- [x] sulfuras_sellin_m1_quality_5 — 전설 아이템: 기한 마감 후에도 변화 없음
+- [x] agedBrie_sellin_0_quality_0 — Aged Brie: 기한 지나면 품질 +2
+- [x] agedBrie_sellin_0_quality_50 — Aged Brie: 품질 상한 50 초과 불가
+- [x] backstage_pass_sellin_15_quality_0 — Backstage: 10일 초과 시 품질 +1
+- [x] backstage_pass_sellin_0_quality_0 — Backstage: 공연 지난 후 품질 0
+- [x] backstage_pass_sellin_0_quality_51 — Backstage: 품질 초과 후 공연 종료 시 0
+- [x] should_be_nothing_when_no_item — 빈 배열: 아이템 없을 경우 정상 처리
+- [x] ApprovalTest ThirtyDays — Golden Master 30일 스냅샷 승인

@@ -1,0 +1,22 @@
+# 빌드 산출물
+/cpp/build/
+
+# CMake 캐시
+cmake_test_discovery_*.json
+CMakeCache.txt
+CMakeFiles/
+
+# 커버리지
+*.gcda
+*.gcno
+lcov.info
+
+# ApprovalTests 임시 파일
+*.received.txt
+
+# VSCode
+.vscode/
+
+# Windows
+Thumbs.db
+desktop.ini
