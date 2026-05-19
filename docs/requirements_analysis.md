@@ -1,0 +1,124 @@
+# Gilded Rose Requirements Analysis
+
+## 1. 아이템 타입별 비즈니스 규칙 표
+
+| Item Type | sellIn 변화 | quality 변화 | sellIn 만료 후 | quality 범위 | 비고 |
+|---|---:|---:|---:|---:|---|
+| Normal | 매일 -1 | 매일 -1 | 매일 -2 | 0~50 | 일반 아이템 |
+| Aged Brie | 매일 -1 | 매일 +1 | 매일 +2 | 0~50 | 오래될수록 가치 증가 |
+| Backstage Pass | 매일 -1 | sellIn > 10: +1<br>5 < sellIn <= 10: +2<br>0 <= sellIn <= 5: +3 | quality = 0 | 0~50 | 콘서트 이후 가치 0 |
+| Sulfuras | 변화 없음 | 변화 없음 | 변화 없음 | 80 예외 | 전설 아이템, sellIn/quality 모두 불변 |
+| Conjured | 매일 -1 | 매일 -2 | 매일 -4 | 0~50 | Normal 감소율의 2배 |
+
+## 2. 문자열 비교/분기 시 주의점
+
+1. 아이템 타입 판별은 `std::string`의 정확한 비교가 필요한 경우 `==`를 사용한다.
+   - 예: `item.name == "Aged Brie"`
+   - 오타, 공백, 대소문자 차이가 있으면 다른 아이템으로 처리된다.
+
+2. `std::string::find()`를 사용할 경우 부분 문자열 매칭에 주의한다.
+   - 예: `item.name.find("Conjured") != std::string::npos`
+   - `"Conjured Mana Cake"`처럼 접두어/포함 문자열 기반 분류가 필요하면 유용하다.
+   - 단, `"Not Conjured"` 같은 의도치 않은 이름도 매칭될 수 있다.
+
+3. Backstage Pass는 전체 이름이 길다.
+   - 일반적으로 `"Backstage passes to a TAFKAL80ETC concert"`와 정확히 비교한다.
+   - `find("Backstage passes")`를 쓰면 유연하지만, 의도치 않은 부분 매칭 가능성이 있다.
+
+4. 분기 순서가 중요하다.
+   - `Sulfuras`는 quality/sellIn이 절대 변하면 안 되므로 가장 먼저 예외 처리하는 것이 안전하다.
+   - `Conjured`는 Normal과 유사하지만 감소율이 다르므로 Normal 처리에 섞이지 않도록 별도 분기한다.
+
+## 3. 예외/경계값 조건
+
+1. `quality`는 음수가 될 수 없다.
+   - Normal, Conjured 아이템 감소 시 0 미만으로 내려가지 않도록 보정한다.
+
+2. `quality`는 50을 초과할 수 없다.
+   - Aged Brie, Backstage Pass 증가 시 50을 넘지 않도록 보정한다.
+
+3. `Sulfuras`는 예외적으로 quality가 80이다.
+   - 일반 quality 상한 50 규칙을 적용하지 않는다.
+   - sellIn도 감소하지 않는다.
+   - quality도 변하지 않는다.
+
+4. `sellIn == 0` 처리에 주의한다.
+   - 하루 업데이트 시점에서 sellIn이 0이면 업데이트 후 만료 상태가 된다.
+   - 구현 방식에 따라 "감소 전 sellIn 기준"인지 "감소 후 sellIn 기준"인지 테스트로 고정해야 한다.
+   - 기존 Gilded Rose 규칙에서는 보통 현재 sellIn 값을 기준으로 품질 변화량을 계산한 뒤 sellIn을 감소시킨다.
+
+5. `sellIn < 0`인 아이템은 이미 만료된 상태다.
+   - Normal: quality -2
+   - Aged Brie: quality +2
+   - Conjured: quality -4
+   - Backstage Pass: quality = 0
+
+6. `quality == 0` 경계값
+   - 감소형 아이템은 더 이상 감소하지 않는다.
+   - Normal, Conjured 모두 0 유지.
+
+7. `quality == 50` 경계값
+   - 증가형 아이템은 더 이상 증가하지 않는다.
+   - Aged Brie, Backstage Pass 모두 50 유지.
+
+## 4. Conjured 신규 요구사항 명세
+
+1. Conjured 아이템은 Normal 아이템과 동일하게 sellIn이 매일 1 감소한다.
+
+2. Conjured 아이템의 quality 감소율은 Normal 아이템의 2배다.
+   - sellIn 만료 전: 하루에 quality -2
+   - sellIn 만료 후: 하루에 quality -4
+
+3. Conjured 아이템도 quality 하한 0을 지켜야 한다.
+   - 예: quality 1인 Conjured 아이템은 업데이트 후 -1이 아니라 0이 된다.
+
+4. Conjured 아이템도 quality 상한 50 규칙의 대상이다.
+   - 단, Conjured는 감소형 아이템이므로 일반적으로 상한 초과 보정보다는 하한 보정이 중요하다.
+
+5. 이름 판별 방식은 프로젝트 정책에 따라 결정한다.
+   - 정확히 `"Conjured"`만 지원할지
+   - `"Conjured Mana Cake"`처럼 이름에 `"Conjured"`가 포함된 모든 아이템을 지원할지 명확히 해야 한다.
+
+## 5. Google Test 기준 테스트 시나리오 목록
+
+1. Normal 아이템은 하루가 지나면 sellIn이 1 감소한다.
+
+2. Normal 아이템은 하루가 지나면 quality가 1 감소한다.
+
+3. Normal 아이템은 sellIn이 지난 뒤 quality가 하루에 2 감소한다.
+
+4. Normal 아이템의 quality는 0 미만으로 내려가지 않는다.
+
+5. Aged Brie는 하루가 지나면 quality가 1 증가한다.
+
+6. Aged Brie는 sellIn이 지난 뒤 quality가 하루에 2 증가한다.
+
+7. Aged Brie의 quality는 50을 초과하지 않는다.
+
+8. Backstage Pass는 sellIn이 11일 이상이면 quality가 1 증가한다.
+
+9. Backstage Pass는 sellIn이 10일 이하이면 quality가 2 증가한다.
+
+10. Backstage Pass는 sellIn이 5일 이하이면 quality가 3 증가한다.
+
+11. Backstage Pass의 quality는 50을 초과하지 않는다.
+
+12. Backstage Pass는 콘서트가 지난 뒤 quality가 0이 된다.
+
+13. Sulfuras는 하루가 지나도 sellIn이 변하지 않는다.
+
+14. Sulfuras는 하루가 지나도 quality가 변하지 않는다.
+
+15. Sulfuras의 quality 80은 일반 quality 상한 50 규칙의 예외다.
+
+16. Conjured 아이템은 하루가 지나면 sellIn이 1 감소한다.
+
+17. Conjured 아이템은 sellIn 만료 전 quality가 하루에 2 감소한다.
+
+18. Conjured 아이템은 sellIn 만료 후 quality가 하루에 4 감소한다.
+
+19. Conjured 아이템의 quality는 0 미만으로 내려가지 않는다.
+
+20. Conjured 이름 판별 정책을 검증한다.
+    - 정확히 `"Conjured"`만 매칭하는지
+    - 또는 `"Conjured Mana Cake"` 같은 포함 이름도 매칭하는지 테스트로 고정한다.

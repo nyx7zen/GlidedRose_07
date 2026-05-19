@@ -23,5 +23,12 @@ enable_testing()
 add_executable(gilded_rose_test test/GildedRoseTest.cpp)
 target_link_libraries(gilded_rose_test gilded_rose GTest::gtest_main)
 
+add_executable(golden_master_test test/GoldenMasterTest.cpp)
+target_link_libraries(golden_master_test gilded_rose GTest::gtest_main)
+target_compile_definitions(golden_master_test PRIVATE
+    GOLDEN_MASTER_EXPECTED_DIR="${CMAKE_CURRENT_SOURCE_DIR}/test/golden_master"
+)
+
 include(GoogleTest)
 gtest_discover_tests(gilded_rose_test)
+gtest_discover_tests(golden_master_test)
